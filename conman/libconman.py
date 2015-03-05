@@ -19,6 +19,12 @@ class CMDir(Structure):
 		('recurse', c_int)
 	]
 
+class CMGroup(Structure):
+	_fields_ = [
+		('state', c_int),
+		('gid', c_int)
+	]
+
 cm = CDLL('/usr/local/lib/libconman.so')
 
 cm.cm_strerror.argtypes = [c_int]
@@ -37,3 +43,10 @@ cm.cm_dir_get.argtypes = [c_char_p, POINTER(CMDir)]
 cm.cm_dir_get.restypes = [c_int]
 cm.cm_dir_set.argtypes = [c_char_p, POINTER(CMDir)]
 cm.cm_dir_set.restypes = [c_int]
+
+cm.cm_group_init.argtypes = [POINTER(CMGroup)]
+cm.cm_group_init.restypes = [c_int]
+cm.cm_group_get.argtypes = [c_char_p, POINTER(CMGroup)]
+cm.cm_group_get.restypes = [c_int]
+cm.cm_group_set.argtypes = [c_char_p, POINTER(CMGroup)]
+cm.cm_group_set.restypes = [c_int]
