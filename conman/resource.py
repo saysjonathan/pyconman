@@ -2,8 +2,8 @@ from ctypes import *
 from conman import libconman
 
 class Resource(object):
-	def __init__(self):
-		self._type = self.__class__.__name__.lower()
+	def _gettype(self):
+		return self.__class__.__name__.lower()
 
 	def get(self):
 		get = getattr(getattr(libconman, 'cm'), "cm_{0}_get".format(self._type))
