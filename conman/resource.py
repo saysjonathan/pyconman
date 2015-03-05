@@ -9,13 +9,13 @@ class Resource(object):
 		get = getattr(getattr(libconman, 'cm'), "cm_{0}_get".format(self._type))
 		i = get(cast(self.name, c_char_p), byref(self._data))
 		if i < 0:
-			raise ValueError(i)
+			raise ValueError("[{0}] {1}: {2}".format(self._type, self.name, i))
 
 	def set(self):
 		set = getattr(getattr(libconman, 'cm'), "cm_{0}_set".format(self._type))
 		i = set(cast(self.name, c_char_p), byref(self._data))
 		if i < 0:
-			raise ValueError(i)
+			raise ValueError("[{0}] {1}: {2}".format(self._type, self.name, i))
 		
 	def init(self):
 		data = getattr(libconman, "CM{0}".format(self._type.capitalize()))

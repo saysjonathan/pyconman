@@ -1,9 +1,10 @@
 from ctypes import *
 from conman import libconman
+from conman.state import *
 from conman.resource import Resource
 
 class File(Resource):
-	def __init__(self, path, state=0, owner='', group='', mode='', source=''):
+	def __init__(self, path, state=present, owner='', group='', mode='', source=''):
 		self._type = self._gettype()
 		self.name = path
 		self.state = state

@@ -1,9 +1,10 @@
 from ctypes import *
 from conman import libconman
+from conman.state import *
 from conman.resource import Resource
 
 class Dir(Resource):
-	def __init__(self, path, state=0, owner='', group='', mode='', recurse=0):
+	def __init__(self, path, state=present, owner='', group='', mode='', recurse=0):
 		self._type = self._gettype()
 		self.name = path
 		self.state = state

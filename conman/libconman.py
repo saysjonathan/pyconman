@@ -25,6 +25,17 @@ class CMGroup(Structure):
 		('gid', c_int)
 	]
 
+class CMUser(Structure):
+	_fields_ = [
+		('state', c_int),
+		('passwd', c_char_p),
+		('uid', c_int),
+		('group', c_char_p),
+		('comment', c_char_p),
+		('homedir', c_char_p),
+		('shell', c_char_p)
+	]
+
 cm = CDLL('/usr/local/lib/libconman.so')
 
 cm.cm_strerror.argtypes = [c_int]
@@ -50,3 +61,10 @@ cm.cm_group_get.argtypes = [c_char_p, POINTER(CMGroup)]
 cm.cm_group_get.restypes = [c_int]
 cm.cm_group_set.argtypes = [c_char_p, POINTER(CMGroup)]
 cm.cm_group_set.restypes = [c_int]
+
+cm.cm_user_init.argtypes = [POINTER(CMUser)]
+cm.cm_user_init.restypes = [c_int]
+cm.cm_user_get.argtypes = [c_char_p, POINTER(CMUser)]
+cm.cm_user_get.restypes = [c_int]
+cm.cm_user_set.argtypes = [c_char_p, POINTER(CMUser)]
+cm.cm_user_set.restypes = [c_int]
